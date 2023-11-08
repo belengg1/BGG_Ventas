@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\Countries\CountriesIndex.razor" />
+    <Content Remove="Shared\GenericList.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,19 +16,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Countries\CountriesIndex.razor" />
+    <_ContentIncludedByDefault Remove="Shared\GenericList.razor" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Countries\CountriesIndex.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Countries\CountriesIndex.razor" />
+    <None Include="Shared\GenericList.razor" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Sales.Shared\Sales.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Shared\GenericList.razor" />
   </ItemGroup>
 
 </Project>
