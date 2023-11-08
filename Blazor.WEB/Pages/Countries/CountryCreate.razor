@@ -26,13 +26,16 @@
             return;
         }
 
-        countryForm!.FormPostedSuccesfully = true;
+        countryForm!.FormPostedSuccessfully = true;
 
         navigationManager.NavigateTo("/countries");
     }
 
     private void Return()
     {
+
+        countryForm!.FormPostedSuccessfully = true;
+
         navigationManager.NavigateTo("/countries");
     }
 

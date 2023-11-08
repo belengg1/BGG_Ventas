@@ -1,0 +1,69 @@
+﻿@page "/countries/edit/{Id:int}"
+@using Blazor.WEB.Repositories;
+@using Sales.Shared.Entities;
+@inject IRepository repository
+@inject NavigationManager navigationManager
+@inject SweetAlertService sweetAlertService
+
+<h3>Editar País</h3>
+
+@if(country is null)
+{
+       <div class="aligns-item-center">
+        <img src="https://www.purplerosetheatre.org/wp-content/themes/dt-the7-child-2020/images/loader.gif" style="width: 4cm; height: 4cm;">
+        </div>
+
+    //<p>Cargando...</p>
+}
+else
+{
+    <CountryForm @ref="countryForm" Country="country" OnValidSubmit="EditAsync" ReturnAction="Return" />
+}
+
+@code {
+
+    private Country? country;
+    private CountryForm? countryForm;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var responseHttp = await repository.Get<Country>($"/api/countries/{Id}");
+        if (responseHttp.Error)
+        {
+            if (responseHttp.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("/countries");
+                return;
+            }
+
+            var message = await responseHttp.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+
+        country = responseHttp.Response;
+    }
+
+
+    private async Task EditAsync()
+    {
+        var responseHttp = await repository.Put("api/countries/", country);
+        if(responseHttp.Error)
+        {
+            var message = await responseHttp.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+        countryForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/countries");
+    }
+
+    private void Return()
+    {
+        countryForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/countries");
+    }
+}

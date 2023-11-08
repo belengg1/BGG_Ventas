@@ -39,12 +39,12 @@
         editContext = new (Country);
     }
 
-    public bool FormPostedSuccesfully { get; set; } = false;
+    public bool FormPostedSuccessfully { get; set; } = false;
 
     private async Task OnBeforeInternalNavigation(LocationChangingContext context)
     {
         var formWasMofied = editContext.IsModified();
-        if (!formWasMofied || FormPostedSuccesfully)
+        if (!formWasMofied || FormPostedSuccessfully)
         {
             return;
         }
