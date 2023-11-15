@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer("name=DockerConnection"));
 builder.Services.AddTransient<SeedDb>();
 var app = builder.Build();
-SeedData(app);
+SeedData(app);//linea que se comenta y descomenta
 
 void SeedData(WebApplication app)
 {
