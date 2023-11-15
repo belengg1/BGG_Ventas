@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sales.API.Data;
 using Sales.Shared.Entities;
@@ -15,13 +14,13 @@ namespace Sales.API.Controllers
         //atributo
         private readonly DataContext _context;
 
-        public CountriesController(DataContext context) 
+        public CountriesController(DataContext context)
         {
             _context = context;
         }
         //POST
         [HttpPost]
-        public async Task<ActionResult> Post(Country country)
+        public async Task<ActionResult> PostAsync(Country country)
         {
 
             try
@@ -36,7 +35,8 @@ namespace Sales.API.Controllers
                 {
                     return BadRequest("Ya hay un país con ese nombre");
                 }
-                return BadRequest(dbUpdateException.Message);
+                return BadRequest("Ya hay un país con ese nombre");
+                //return BadRequest(dbUpdateException.Message);
             }
             catch (Exception exception)
             {
@@ -92,7 +92,7 @@ namespace Sales.API.Controllers
         public async Task<IActionResult> DeleteAsync(int id)
         {
             var country = await _context.Countries.FirstOrDefaultAsync(x => x.Id == id);
-            if(country == null)
+            if (country == null)
             {
                 return NotFound();
             }

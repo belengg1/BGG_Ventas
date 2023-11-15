@@ -13,8 +13,11 @@ builder.Services.AddSwaggerGen();
 //SE AGREGO LO SIGUIENTE
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer("name=DockerConnection"));
 builder.Services.AddTransient<SeedDb>();
+
+
 var app = builder.Build();
-SeedData(app);//linea que se comenta y descomenta
+SeedData(app);
+//linea que se comenta y descomenta
 
 void SeedData(WebApplication app)
 {
